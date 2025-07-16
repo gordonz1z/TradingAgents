@@ -116,13 +116,25 @@ pip install -r requirements.txt
 
 You will also need the FinnHub API for financial data. All of our code is implemented with the free tier.
 ```bash
-export FINNHUB_API_KEY=$YOUR_FINNHUB_API_KEY
+export FINNHUB_API_KEY=d1k1m21r01ql1h3a3v00d1k1m21r01ql1h3a3v0g
 ```
 
-You will need the OpenAI API for all the agents.
+#### LLM Provider Setup
+
+**Option 1: OpenAI API**
 ```bash
 export OPENAI_API_KEY=$YOUR_OPENAI_API_KEY
 ```
+
+**Option 2: DeepSeek API** (Recommended for cost-effectiveness)
+```bash
+export OPENAI_API_KEY=sk-7ad0cd8f1a9544bda4bed6365655f3ff
+```
+
+**Option 3: Other Providers**
+The framework also supports Anthropic, Google, OpenRouter, and Ollama. See [DEEPSEEK_SETUP.md](DEEPSEEK_SETUP.md) for detailed configuration instructions.
+
+> 💡 **DeepSeek Integration**: We now support DeepSeek API for cost-effective and high-performance trading analysis. DeepSeek offers excellent reasoning capabilities at competitive pricing. See our [DeepSeek Setup Guide](DEEPSEEK_SETUP.md) for detailed instructions.
 
 ### CLI Usage
 

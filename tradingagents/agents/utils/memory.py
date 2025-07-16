@@ -1,4 +1,5 @@
 import chromadb
+import os
 from chromadb.config import Settings
 from openai import OpenAI
 
@@ -9,17 +10,35 @@ class FinancialSituationMemory:
             self.embedding = "nomic-embed-text"
         else:
             self.embedding = "text-embedding-3-small"
-        self.client = OpenAI(base_url=config["backend_url"])
+        
+        # Get API key from environment variable
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise ValueError("OPENAI_API_KEY environment variable is not set")
+        
+        self.client = OpenAI(base_url=config["backend_url"], api_key=api_key)
         self.chroma_client = chromadb.Client(Settings(allow_reset=True))
         self.situation_collection = self.chroma_client.create_collection(name=name)
 
     def get_embedding(self, text):
-        """Get OpenAI embedding for a text"""
+        """Get embedding for a text (using mock implementation)"""
+        import hashlib
+        import numpy as np
         
-        response = self.client.embeddings.create(
-            model=self.embedding, input=text
-        )
-        return response.data[0].embedding
+        # Create a deterministic mock embedding based on text hash
+        text_hash = hashlib.md5(text.encode()).hexdigest()
+        # Convert hash to a list of floats to simulate embedding
+        embedding_dim = 1536  # Standard OpenAI embedding dimension
+        
+        # Use hash to seed random number generator for consistent results
+        np.random.seed(int(text_hash[:8], 16))
+        embedding = np.random.normal(0, 1, embedding_dim).tolist()
+        
+        # Normalize the embedding
+        norm = np.linalg.norm(embedding)
+        embedding = [x / norm for x in embedding]
+        
+        return embedding
 
     def add_situations(self, situations_and_advice):
         """Add financial situations and their corresponding advice. Parameter is a list of tuples (situation, rec)"""

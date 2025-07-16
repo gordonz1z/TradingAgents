@@ -71,6 +71,7 @@ class StockstatsUtils:
                     auto_adjust=True,
                 )
                 data = data.reset_index()
+                data['Date'] = pd.to_datetime(data['Date']).dt.tz_localize(None)
                 data.to_csv(data_file, index=False)
 
             df = wrap(data)

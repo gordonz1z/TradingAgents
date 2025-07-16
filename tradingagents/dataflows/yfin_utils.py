@@ -39,6 +39,15 @@ class YFinanceUtils:
         end_date = pd.to_datetime(end_date) + pd.DateOffset(days=1)
         end_date = end_date.strftime("%Y-%m-%d")
         stock_data = ticker.history(start=start_date, end=end_date)
+        
+        # Handle datetime index conversion to avoid dtype issues
+        if not stock_data.empty:
+            stock_data = stock_data.reset_index()
+            if 'Date' in stock_data.columns:
+                stock_data['Date'] = stock_data['Date'].dt.tz_localize(None)
+                stock_data['Date'] = stock_data['Date'].astype('datetime64[us]')
+                stock_data = stock_data.set_index('Date')
+        
         # save_output(stock_data, f"Stock data for {ticker.ticker}", save_path)
         return stock_data
 
