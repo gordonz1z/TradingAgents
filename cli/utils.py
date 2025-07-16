@@ -4,18 +4,18 @@ from typing import List, Optional, Tuple, Dict
 from cli.models import AnalystType
 
 ANALYST_ORDER = [
-    ("Market Analyst", AnalystType.MARKET),
-    ("Social Media Analyst", AnalystType.SOCIAL),
-    ("News Analyst", AnalystType.NEWS),
-    ("Fundamentals Analyst", AnalystType.FUNDAMENTALS),
+    ("市場分析師", AnalystType.MARKET),
+    ("社交分析師", AnalystType.SOCIAL),
+    ("新聞分析師", AnalystType.NEWS),
+    ("基本面分析師", AnalystType.FUNDAMENTALS),
 ]
 
 
-def get_ticker() -> str:
-    """Prompt the user to enter a ticker symbol."""
+def get_ticker():
+    """提示用戶輸入股票代碼。"""
     ticker = questionary.text(
-        "Enter the ticker symbol to analyze:",
-        validate=lambda x: len(x.strip()) > 0 or "Please enter a valid ticker symbol.",
+        "請輸入要分析的股票代號：",
+        validate=lambda x: len(x.strip()) > 0 or "請輸入有效的股票代號。",
         style=questionary.Style(
             [
                 ("text", "fg:green"),
@@ -25,14 +25,14 @@ def get_ticker() -> str:
     ).ask()
 
     if not ticker:
-        console.print("\n[red]No ticker symbol provided. Exiting...[/red]")
+        console.print("\n[red]未提供股票代號。正在退出...[/red]")
         exit(1)
 
     return ticker.strip().upper()
 
 
-def get_analysis_date() -> str:
-    """Prompt the user to enter a date in YYYY-MM-DD format."""
+def get_analysis_date():
+    """提示用戶輸入 YYYY-MM-DD 格式的日期。"""
     import re
     from datetime import datetime
 
@@ -46,9 +46,9 @@ def get_analysis_date() -> str:
             return False
 
     date = questionary.text(
-        "Enter the analysis date (YYYY-MM-DD):",
+        "請輸入分析日期 (YYYY-MM-DD)：",
         validate=lambda x: validate_date(x.strip())
-        or "Please enter a valid date in YYYY-MM-DD format.",
+        or "請輸入有效的日期格式 YYYY-MM-DD。",
         style=questionary.Style(
             [
                 ("text", "fg:green"),
@@ -58,21 +58,21 @@ def get_analysis_date() -> str:
     ).ask()
 
     if not date:
-        console.print("\n[red]No date provided. Exiting...[/red]")
+        console.print("\n[red]未提供日期。正在退出...[/red]")
         exit(1)
 
     return date.strip()
 
 
 def select_analysts() -> List[AnalystType]:
-    """Select analysts using an interactive checkbox."""
+    """使用互動式複選框選擇分析師。"""
     choices = questionary.checkbox(
-        "Select Your [Analysts Team]:",
+        "選擇您的 [分析師團隊]：",
         choices=[
             questionary.Choice(display, value=value) for display, value in ANALYST_ORDER
         ],
-        instruction="\n- Press Space to select/unselect analysts\n- Press 'a' to select/unselect all\n- Press Enter when done",
-        validate=lambda x: len(x) > 0 or "You must select at least one analyst.",
+        instruction="\n- 按空白鍵選擇/取消選擇分析師\n- 按 'a' 全選/全不選\n- 按 Enter 完成選擇",
+        validate=lambda x: len(x) > 0 or "您必須至少選擇一位分析師。",
         style=questionary.Style(
             [
                 ("checkbox-selected", "fg:green"),
@@ -84,28 +84,28 @@ def select_analysts() -> List[AnalystType]:
     ).ask()
 
     if not choices:
-        console.print("\n[red]No analysts selected. Exiting...[/red]")
+        console.print("\n[red]未選擇分析師。正在退出...[/red]")
         exit(1)
 
     return choices
 
 
 def select_research_depth() -> int:
-    """Select research depth using an interactive selection."""
+    """使用互動式選擇器選擇研究深度。"""
 
     # Define research depth options with their corresponding values
     DEPTH_OPTIONS = [
-        ("Shallow - Quick research, few debate and strategy discussion rounds", 1),
-        ("Medium - Middle ground, moderate debate rounds and strategy discussion", 3),
-        ("Deep - Comprehensive research, in depth debate and strategy discussion", 5),
+        ("淺層 - 快速研究，較少辯論和策略討論輪次", 1),
+        ("中等 - 中等程度，適度的辯論輪次和策略討論", 3),
+        ("深度 - 全面研究，深入的辯論和策略討論", 5),
     ]
 
     choice = questionary.select(
-        "Select Your [Research Depth]:",
+        "選擇您的 [研究深度]：",
         choices=[
             questionary.Choice(display, value=value) for display, value in DEPTH_OPTIONS
         ],
-        instruction="\n- Use arrow keys to navigate\n- Press Enter to select",
+        instruction="\n- 使用方向鍵導航\n- 按 Enter 選擇",
         style=questionary.Style(
             [
                 ("selected", "fg:yellow noinherit"),
@@ -116,14 +116,14 @@ def select_research_depth() -> int:
     ).ask()
 
     if choice is None:
-        console.print("\n[red]No research depth selected. Exiting...[/red]")
+        console.print("\n[red]未選擇研究深度。正在退出...[/red]")
         exit(1)
 
     return choice
 
 
 def select_shallow_thinking_agent(provider) -> str:
-    """Select shallow thinking llm engine using an interactive selection."""
+    """使用互動式選擇器選擇快速思考 LLM 引擎。"""
 
     # Define shallow thinking llm engine options with their corresponding model names
     SHALLOW_AGENT_OPTIONS = {
@@ -160,12 +160,12 @@ def select_shallow_thinking_agent(provider) -> str:
     }
 
     choice = questionary.select(
-        "Select Your [Quick-Thinking LLM Engine]:",
+        "選擇您的 [快速思考 LLM 引擎]：",
         choices=[
             questionary.Choice(display, value=value)
             for display, value in SHALLOW_AGENT_OPTIONS[provider.lower()]
         ],
-        instruction="\n- Use arrow keys to navigate\n- Press Enter to select",
+        instruction="\n- 使用方向鍵導航\n- 按 Enter 選擇",
         style=questionary.Style(
             [
                 ("selected", "fg:magenta noinherit"),
@@ -177,7 +177,7 @@ def select_shallow_thinking_agent(provider) -> str:
 
     if choice is None:
         console.print(
-            "\n[red]No shallow thinking llm engine selected. Exiting...[/red]"
+            "\n[red]未選擇快速思考 LLM 引擎。正在退出...[/red]"
         )
         exit(1)
 
@@ -185,7 +185,7 @@ def select_shallow_thinking_agent(provider) -> str:
 
 
 def select_deep_thinking_agent(provider) -> str:
-    """Select deep thinking llm engine using an interactive selection."""
+    """使用互動式選擇器選擇深度思考 LLM 引擎。"""
 
     # Define deep thinking llm engine options with their corresponding model names
     DEEP_AGENT_OPTIONS = {
@@ -227,12 +227,12 @@ def select_deep_thinking_agent(provider) -> str:
     }
     
     choice = questionary.select(
-        "Select Your [Deep-Thinking LLM Engine]:",
+        "選擇您的 [深度思考 LLM 引擎]：",
         choices=[
             questionary.Choice(display, value=value)
             for display, value in DEEP_AGENT_OPTIONS[provider.lower()]
         ],
-        instruction="\n- Use arrow keys to navigate\n- Press Enter to select",
+        instruction="\n- 使用方向鍵導航\n- 按 Enter 選擇",
         style=questionary.Style(
             [
                 ("selected", "fg:magenta noinherit"),
@@ -243,30 +243,30 @@ def select_deep_thinking_agent(provider) -> str:
     ).ask()
 
     if choice is None:
-        console.print("\n[red]No deep thinking llm engine selected. Exiting...[/red]")
+        console.print("\n[red]未選擇深度思考 LLM 引擎。正在退出...[/red]")
         exit(1)
 
     return choice
 
 def select_llm_provider() -> tuple[str, str]:
-    """Select the LLM provider using interactive selection."""
+    """使用互動式選擇器選擇 LLM 提供者。"""
     # Define LLM provider options with their corresponding endpoints
     BASE_URLS = [
+        ("DeepSeek", "https://api.deepseek.com/v1"),
         ("OpenAI", "https://api.openai.com/v1"),
         ("Anthropic", "https://api.anthropic.com/"),
         ("Google", "https://generativelanguage.googleapis.com/v1"),
-        ("DeepSeek", "https://api.deepseek.com/v1"),
         ("Openrouter", "https://openrouter.ai/api/v1"),
         ("Ollama", "http://localhost:11434/v1"),        
     ]
     
     choice = questionary.select(
-        "Select your LLM Provider:",
+        "選擇您的 LLM 提供者：",
         choices=[
             questionary.Choice(display, value=(display, value))
             for display, value in BASE_URLS
         ],
-        instruction="\n- Use arrow keys to navigate\n- Press Enter to select",
+        instruction="\n- 使用方向鍵導航\n- 按 Enter 選擇",
         style=questionary.Style(
             [
                 ("selected", "fg:magenta noinherit"),
@@ -277,10 +277,10 @@ def select_llm_provider() -> tuple[str, str]:
     ).ask()
     
     if choice is None:
-        console.print("\n[red]no OpenAI backend selected. Exiting...[/red]")
+        console.print("\n[red]未選擇 LLM 後端。正在退出...[/red]")
         exit(1)
     
     display_name, url = choice
-    print(f"You selected: {display_name}\tURL: {url}")
+    print(f"您選擇了：{display_name}\t網址：{url}")
     
     return display_name, url

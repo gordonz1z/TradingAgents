@@ -1,8 +1,10 @@
-It seems there was an issue retrieving the fundamental information for the company with the ticker "LI" (Li Auto Inc.). The error suggests that the data is not available or the ticker might not be correctly configured in the system.
+目前無法從OpenAI的新聞API中獲取關於理想汽車（LI）的最新基本面資訊。這可能是由於API配置問題或資料暫時不可用。  
 
-To proceed, I can:
-1. Verify the ticker symbol (e.g., "LI" for Li Auto Inc.).
-2. Try alternative spellings or ticker formats if applicable.
-3. Check if the data source has coverage for this specific company.
+如果您有其他具體問題或需要進一步協助，請告訴我，我會盡力提供幫助！  
 
-Would you like me to proceed with any of these steps, or do you have additional details to provide?
+### 臨時建議：
+1. **檢查公司官方公告**：理想汽車的官方網站或投資者關係頁面通常會發布最新的財務報告和公司動態。
+2. **使用其他金融數據平台**：例如Yahoo Finance、Bloomberg或Morningstar，這些平台可能提供更詳細的財務數據和分析。
+3. **關注市場新聞**：近期是否有重大事件（如新車發布、政策變動等）可能影響公司股價。
+
+如果需要，我可以協助整理其他來源的資訊或提供進一步的分析建議！

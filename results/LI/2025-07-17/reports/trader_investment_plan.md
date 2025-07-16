@@ -1,0 +1,3 @@
+Based on the comprehensive analysis provided, the evidence overwhelmingly supports a **SELL** recommendation for LI. The convergence of fundamental risks (policy threats to its core technology, demand slowdown, and deteriorating cash flow), technical breakdowns (death cross pattern), and valuation concerns create a high-probability downside scenario. The lessons from past missteps—such as overestimating cash reserves as a safety net and misjudging market saturation—further validate this cautious stance.  
+
+**FINAL TRANSACTION PROPOSAL: SELL**

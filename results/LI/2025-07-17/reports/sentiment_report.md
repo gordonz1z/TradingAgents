@@ -1,5 +1,10 @@
-It appears there is still an issue retrieving the latest news for Li Auto (ticker: LI) for today. This could be due to a temporary unavailability of data or a configuration issue with the news API. 
+目前無法從 OpenAI 的新聞 API 中獲取關於 LI（理想汽車）的最新新聞。這可能是由於 API 配置問題或暫時無法獲取相關數據。  
 
-To proceed, I can manually analyze the company's recent developments, social media sentiment, and other publicly available information to provide you with a comprehensive report. Let me know if you'd like me to proceed with that approach. Alternatively, we can try again later to fetch the news data. 
+我會嘗試其他方法來分析 LI 的社交媒體動態和市場情緒，但如果您有其他具體需求或問題，請隨時告訴我！  
 
-Would you like me to continue with the analysis based on other sources?
+### 下一步建議：
+1. **檢查 API 配置**：確認 API 是否正確配置或是否有其他替代的新聞來源。
+2. **手動分析社交媒體**：可以從 Twitter、Reddit 或財經論壇（如雪球）獲取 LI 的討論內容。
+3. **技術分析**：如果新聞數據不可用，可以轉向技術分析或基本面分析來評估 LI 的投資價值。
+
+請告訴我您希望如何繼續！
